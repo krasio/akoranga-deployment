@@ -4,6 +4,8 @@ name: akoranga
 releases:
 - name: akoranga-nginx-boshrelease
   version: latest
+- name: akoranga-go-boshrelease
+  version: latest
 
 update:
   canaries: 1
@@ -27,3 +29,14 @@ instance_groups:
   networks:
   - name: default
   stemcell: default
+
+- name: akoranga-app
+  azs: [z1, z2, z3]
+  instances: 2
+  jobs:
+  - name: app
+    release: akoranga-go-boshrelease
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
